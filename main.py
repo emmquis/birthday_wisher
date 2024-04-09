@@ -7,6 +7,7 @@ import pandas
 
 MY_EMAIL = os.environ["EMAIL_VAR"]
 PASSWORD = os.environ["PASS_VAR"]
+SMTP_URL = os.environ["SMTP_VAR"]
 
 # 1. Update the birthdays.csv
 try:
@@ -53,7 +54,7 @@ for info in birthday_dict:
             new_letter = letter.replace("[NAME]", birthday_info["name"])
         # print(new_letter)
 
-        with smtplib.SMTP("smtp.gmail.com") as connection:
+        with smtplib.SMTP(SMTP_URL) as connection:
             connection.starttls()
             connection.login(user=MY_EMAIL, password=PASSWORD)
             connection.sendmail(from_addr=MY_EMAIL,
